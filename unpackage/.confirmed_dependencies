@@ -1,0 +1,32 @@
+{
+  "index.html": {
+    "resources": [
+      "first.html"
+    ],
+    "refer": [
+      "first.html",
+      "fourth.html",
+      "second.html",
+      "third.html",
+      "login.html",
+      "main.html",
+      "main2.html"
+    ]
+  },
+  "login.html": {
+    "refer": [
+      "reg.html",
+      "main.html"
+    ]
+  },
+  "reg.html": {
+    "refer": [
+      "login.html"
+    ]
+  },
+  "main.html": {
+    "refer": [
+      "setting.html"
+    ]
+  }
+}

@@ -1,0 +1,272 @@
+<!doctype html>
+<html>
+ 
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+ 		<link rel="stylesheet" href="css/mui.min.css">
+		<!--App自定义的css-->
+		
+    <link href="../css/mui.min.css" rel="stylesheet" />
+    <script src="../js/mui.min.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/vue.js"></script>
+    <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=3I3etjcXAws3WyIW3dbtCdz50uAtAwWY"></script>
+        <script type="text/javascript" src="http://developer.baidu.com/map/jsdemo/demo/convertor.js"></script>-->
+ 
+    <style>
+    	.mui-content-padded{
+			  	margin: 10px;
+			  }
+        .daka{
+            width: 120px;height:120px;line-height: 18px;border-radius:120px;
+            border-width: 5px;
+            border-color:#ffffff;
+            margin-left: auto; margin-right: auto;
+            background-color: #0faeff;
+        }
+ 
+        .daka p{
+            font-size: 24px;
+            color: #ffffff;
+ 
+        }
+        /*.mui-btn-primary:active {
+            background-color: #0062cc;
+        }*/
+        .zj{
+            margin-left: auto;
+            margin-right: auto;
+            border-radius:20px ;
+            background-color:#0faeff ;
+            border-color:#0faeff ;
+ 
+        }
+        .address{
+            text-align: center;
+            line-height: 48px;
+            height: 48px;
+        }
+        .address span{
+            line-height: 24px;
+ 
+        }
+        #map{
+ 
+            height:300px;
+        }
+ 
+    </style>
+ 
+</head>
+ 
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+   
+</header>
+<div class="mui-content" id="app">
+    <div class="mui-card-header" style="background-color: #0faeff;color: #ffffff;">
+        <span style="margin-left: auto; margin-right: auto;">2018-01-01 8:01:02</span>
+        <button onclick="getUserLocation()">当前位置</button>
+    </div>
+    <div id='map'>
+ 
+ 
+    </div>
+    <div class="address">
+        请输入你想去的位置:<input id="address" type="text" />
+ 	  <button type="button" class="mui-btn mui-btn-primary mui-btn-block">确定</button>
+ 
+   </div>  
+   
+</div>
+
+<header class="mui-bar mui-bar-nav">
+    <h1 class="mui-title">欢迎使用百度地图</h1>
+</header>
+ 	
+
+ 
+ 
+<script type="text/javascript" >
+    // 扩展API加载完毕后调用onPlusReady回调函数
+    document.addEventListener('plusready', onPlusReady, false);
+    var map=null;
+    var marker=null;
+    function onPlusReady(){
+// 使用百度地图地位模块获取位置信息
+        //map.centerAndZoom( new plus.maps.Point(point.coords.longitude,point.coords.latitude), 16 );
+        plus.geolocation.getCurrentPosition(function(p){
+ 
+            //addr_code();
+            geo_code(p)
+            // exchange(p);
+        }, function(e){
+            switch(e.code) {
+                case 10:
+                    mui.alert('请开启应用的定位权限', '温馨提示','确定',function(){},'div');
+                    break;
+                case 9:
+                    //mui.alert('请开启手机定位服务');
+                    mui.alert('请开启手机定位服务', '温馨提示','确定',function(){},'div');
+                    break;
+                case 2:
+                    if(e.message.indexOf("[geolocation:13]") > -1) {
+                        //如果网络开启，定位失败，提示检查定位权限
+                        mui.alert('请开启应用的定位权限', '温馨提示','确定',function(){},'div');
+                    }
+                    if(e.message.indexOf("[geolocation:14]") > -1) {
+                        //如果应用的权限开了，提示网络异常
+                        mui.alert('请检查网络是否正常', '温馨提示','确定',function(){},'div');
+                    }
+                    break;
+                case e.PERMISSION_DENIED:
+                    mui.alert('请求定位被拒绝', '温馨提示','确定',function(){},'div');
+                    break;
+                case e.POSITION_UNAVAILABLE:
+                    mui.alert("位置信息不可用", '温馨提示','确定',function(){},'div');
+                    break;
+                case e.TIMEOUT:
+                    mui.alert("获取位置信息超时", '温馨提示','确定',function(){},'div');
+                    break;
+                case e.UNKNOWN_ERROR:
+                    mui.alert("未知错误", '温馨提示','确定',function(){},'div');
+                    break;
+            }
+ 
+        },{enableHighAccuracy:true,coordsType:'bd09ll',timeout:6000,maximumAge:5000,provider:'baidu'});
+    }
+ 
+ 
+    //位置转化坐标
+    function addr_code(){
+        plus.maps.Map.geocode( '绿地蓝海大厦A座', {city:'呼和浩特市',oordsType:'bd09ll',enableHighAccuracy:true}, function(event){
+ 
+ 
+            map = new plus.maps.Map("map");
+            var coord=event.coord;
+            map.centerAndZoom( new plus.maps.Point(coord.longitude,coord.latitude), 16 )
+            marker=new plus.maps.Marker(new plus.maps.Point(coord.longitude,coord.latitude));
+            marker.setIcon("../images/dw.png");
+            marker.setLabel("我的位置");
+            var bubble = new plus.maps.Bubble(event.address);
+            marker.setBubble(bubble);
+            map.addOverlay(marker);
+ 
+            //alert(JSON.stringify(data))
+        }, function(e){} );
+ 
+    }
+ 
+    //坐标转化成位置信息
+    function geo_code(point){
+        plus.maps.Map.reverseGeocode({longitude:point.coords.longitude,latitude:point.coords.latitude},{coordType:point.coordsType}, function(event){
+            //alert(JSON.stringify(event))
+            map = new plus.maps.Map("map");
+ 
+            var coord=event.coord;
+            map.centerAndZoom( new plus.maps.Point(coord.longitude,coord.latitude), 16 )
+            marker=new plus.maps.Marker(new plus.maps.Point(coord.longitude,coord.latitude));
+            marker.setIcon("../images/dw.png");
+            marker.setLabel("我的位置");
+            var bubble = new plus.maps.Bubble(event.address);
+ 
+            marker.setBubble(bubble);
+            map.addOverlay(marker);
+        }, function(e){
+ 
+ 
+        } );
+    }
+    function getUserLocation(){
+        map.getUserLocation( function ( state, point ){
+            if( 0 == state ){
+                alert( JSON.stringify(point) );
+            }else{
+                alert( "Failed!" );
+            }
+ 
+        } );
+    }
+</script>
+ 
+<script type="text/javascript">
+    var app=new Vue({
+        el:'#app',
+        data:{
+            time_list:'',
+            wz_data:'',
+            city:'正在定位中...'
+ 
+        },
+        created:function(){
+            this.time_item();
+            this.getposition();
+        },
+ 
+        methods:{
+            tap_url:function(){
+                mui.openWindow({
+                    url:'work-dcard-my.html',
+                    id:'work-dcard-my.html'
+                })
+            },
+            daka:function(){
+                callajax('api/dcard/save','post',{},function(data){
+                    mui.alert(data.msg);
+                });
+            },
+            time_item:function(){
+                var that=this;
+                app.callajax('api/dcard/index','post',{},function(data){
+                    if(data.code==300){
+                        mui.toast('数据错误');
+ 
+                    }else{
+                        that.time_list=data.kqgz;
+                        that.wz_data=data.kqwz;
+ 
+                    }
+                });
+ 
+            },
+            getposition:function(){
+ 
+//              if (navigator.geolocation)
+//              {
+//                  navigator.geolocation.getCurrentPosition(this.showP());
+//              }
+//              else{x.innerHTML="浏览器不支持定位.";}
+            },
+ 
+            showP:function(){
+//              var lat=position.coords.latitude;
+//              var lng=position.coords.longitude;
+////调用地图命名空间中的转换接口   type的可选值为 1:GPS经纬度，2:搜狗经纬度，3:百度经纬度，4:mapbar经纬度，5:google经纬度，6:搜狗墨卡托
+//              qq.maps.convertor.translate(new qq.maps.LatLng(lat,lng), 1, function(res){
+//                  //取出经纬度并且赋值
+//                  latlng = res[0];
+//
+//                  var map = new qq.maps.Map(document.getElementById("m"),{
+//                      center:  latlng,
+//                      zoom: 13
+//                  });
+//                  //设置marker标记
+//                  var marker = new qq.maps.Marker({
+//                      map : map,
+//                      position : latlng
+//                  });
+//              });
+ 
+ 
+            }
+        }
+ 
+    });
+</script>
+ 
+</body>
+ 
+</html>

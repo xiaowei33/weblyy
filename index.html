@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<style>
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+				background-color: #D3D3D3;
+			}
+			
+			header {
+				width: 100%;
+				position: fixed;
+				top: 0;
+				height: 44px;
+				line-height: 44px;
+				background-color: aquamarine;
+				text-align: center;
+				font-family: "微软雅黑";
+				font-size: 17px;
+			}
+			
+			footer {
+				position: fixed;
+				width: 100%;
+				height: 50px;
+				background-color: aquamarine;
+				bottom: 0;
+			}
+			
+			footer span {
+				float: left;
+				width: 25%;
+				height: 100%;
+				line-height: 50px;
+				text-align: center;
+				font-family: "微软雅黑";
+				font-size: 17px;
+			}
+			.currentWv{
+				color: #fff;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+		南江旅游
+		</header>
+		<footer>
+			<span data-href="first.html" class="currentWv">首页</span>
+			<span data-href="second.html">美食</span>
+			<span data-href="third.html">攻略</span>
+			<span data-href="login.html">我的</span>
+		</footer>
+		<script type="text/javascript">
+			document.addEventListener('plusready', function() {
+				var subpages = ['first.html', 'second.html', 'third.html', 'login.html'];
+				var subpage_style = {
+					top: '45px',
+					bottom: '51px'
+				};
+				var self = plus.webview.currentWebview();
+				var currentid=null;
+				for (var i = 0; i < 4; i++) {
+					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+					if (i > 0) {
+						sub.hide();
+					}else{
+						currentid=subpages[i];
+					}
+					self.append(sub);
+				}
+				document.querySelector("footer").addEventListener("click",function(e){
+					var targetid=e.target.getAttribute("data-href");
+					document.querySelector("span.currentWv").classList.remove("currentWv");
+					e.target.classList.add("currentWv");
+					if(currentid!=targetid){
+						plus.webview.getWebviewById(currentid).hide();
+						plus.webview.getWebviewById(targetid).show();
+						currentid=targetid;
+					}
+				})
+			});
+		</script>
+	</body>
+
+</html>

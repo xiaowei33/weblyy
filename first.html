@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="css/mui.min.css">
+		<!--App自定义的css-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/app.css"/>-->
+	</head>
+
+	<body>
+		<div class="mui-input-row">
+		   <label style="color: red;"><img src="images/logo.png" width="40%"/>	</label>
+		    <input type="text" class="mui-input-speech mui-input-clear" placeholder="语音输入">
+		</div>
+		
+	
+		<div class="mui-content">
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li id="switch" class="mui-table-view-cell">
+					定时轮播
+					<div class="mui-switch">
+						<div class="mui-switch-handle"></div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div id="slider" class="mui-slider" >
+			<div class="mui-slider-group mui-slider-loop">
+				<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#">
+						<img src="images/2.jpg">
+					</a>
+				</div>
+				<!-- 第一张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="images/3.jpg">
+					</a>
+				</div>
+				<!-- 第二张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="images/11.jpg">
+					</a>
+				</div>
+				<!-- 第三张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="images/3.jpg">
+					</a>
+				</div>
+				<!-- 第四张 -->
+				<div class="mui-slider-item">
+					<a href="#">
+						<img src="images/4.jpg">
+					</a>
+				</div>
+				<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+				<div class="mui-slider-item mui-slider-item-duplicate">
+					<a href="#">
+						<img src="images/11.jpg">
+					</a>
+				</div>
+			</div>
+			<div class="mui-slider-indicator">
+				<div class="mui-indicator mui-active"></div>
+				<div class="mui-indicator"></div>
+				<div class="mui-indicator"></div>.
+				<div class="mui-indicator"></div>
+			</div>
+		</div>
+		<ul class="mui-table-view">
+		    <li class="mui-table-view-cell mui-media">
+		        <a href="javascript:;">
+		            <img class="mui-media-object mui-pull-right" src="images/ny.png">
+		            <div class="mui-media-body">
+		              <h4>  光雾山</h4>
+		               <h4><p class="mui-ellipsis"> 光雾山位于四川省巴中市南江县北部，距县城70公里，到陕西汉中市70公里，
+		                	主峰海拔2500米，景区面积400余平方公里，气势雄伟辽阔，地形复杂，峰峦迭嶂，峰林俊美，洞穴幽深，
+		                	山泉密布，云蒸雾绕，林海浩荡，胜景众多。古珍稀动植物为国内名山之首，1993年被省政府列为全省重点风景名胜区。
+		                	2004年元月被国务院批准为国家重点风景名胜区。2009年荣膺国家AAAA级旅游景区。</p></h4>
+		            </div>
+		        </a>
+		    </li>
+		    <li class="mui-table-view-cell mui-media">
+		        <a href="javascript:;">
+		            <img class="mui-media-object mui-pull-right" src="images/sl.png">
+		            <div class="mui-media-body">
+		             <h4> 玉湖水利风景区</h4>
+		               <h4> <p class="mui-ellipsis">玉湖水利风景区位于巴中市南江县红光镇，距南江县城55公里，
+		                	距巴中市区60公里，占地面积29平方公里，主要包括亲水旅游区、风景游览区、都市休闲区、
+		                	湿地生态区和周边景观区，具有纯朴的风土人情和浓厚的渔鱼文化特点。
+		                	景区创建中实施了整治入河入库排污口、搬迁安置区内人口等多项治理措施，水质、水生态显著改善，
+		                	通过举办玉湖抢鱼、玉湖龙舟、庖汤节等活动，年吸引游客33万人次、实现旅游收入6800万元、
+		                	带动就业600余人，社会、经济、生态等综合效益明显。</p></h4>
+		            </div>
+		        </a>
+		    </li>
+		    <li class="mui-table-view-cell mui-media">
+		        <a href="javascript:;">
+		            <img class="mui-media-object mui-pull-right" src="images/dq.jpg">
+		            <div class="mui-media-body">
+		              <h4> 断渠公园</h4>
+		                 <h4><p class="mui-ellipsis">断渠有丰富的历史文化，渠中太虚洞，曾是原始人的栖息地。渠内发现的新石器时代的石刀、石斧及股骨化石和陶器，原始人磨制石器的磨痕清晰可见。1933年5月，红军反“三路围攻”前伤病员在此养伤的巨大石岩，已成为两间开阔敞亮的天然居室。解放前刘姓绅士的“龙泉山庄”，-对联“咫尺山林容我静，等闲名利让人忙”广为流传。数百亩松涛雷鸣，松香弥漫，如入仙境。野兔、松鼠等动物出没其间。</p></h4>
+		            </div>
+		        </a>
+		    </li>
+		      <li class="mui-table-view-cell mui-media">
+		        <a href="javascript:;">
+		            <img class="mui-media-object mui-pull-right" src="images/gm.jpg">
+		            <div class="mui-media-body">
+		             <h4>  贵民石峰</h4>
+		                 <h4><p class="mui-ellipsis">贵民古有雄关两道：一为贵民关，一为木竹关，皆为“一夫当关、万夫莫开”之势。清嘉庆年间，川陕边白莲教农民大起义，曾地这里浴血奋战。1933年4月，红四方面军反三路围攻时，收紧阵地于此。空山大捷后，红军从这里突然出击，在赵公寨一战，创造了以少胜多的战例，一鼓作气收复南江、长赤，攻克了旺苍、苍溪，并直逼广元城下。
+
+　　贵民为石灰岩分布区，岩溶地层形成的石芽漏斗很多，造成难以数计的大小溶洞。地面突起千姿百态的石峰、石笋群，真可谓大千世界中的石林和溶洞王国。该地低洼处海拔不足800米，最高达2500米，峰峦嶂壁，拔地而起，直冲霄汉，雄伟壮观。其神女峰、石人峰较之“巫山神女”并不逊色。若遇朝雾萦回，夕阳喷彩，顿觉飘飘欲仙。有“贵民风光，胜似桂林”之说。</p></h4>
+		            </div>
+		        </a>
+		    </li>
+		      <li class="mui-table-view-cell mui-media">
+		        <a href="javascript:;">
+		            <img class="mui-media-object mui-pull-right" src="images/xwx.jpg">
+		            <div class="mui-media-body">
+		            <h4>  米仓山森林公园</h4>
+		               <h4>  <p class="mui-ellipsis">米仓山国家森林公园位于四川盆地东北缘的南江县北部，地处秦巴山区（秦岭—大巴山）的米仓山南麓。东、北与陕西省南郑县相邻，南抵南江县沙坝乡、关坝乡、寨坡乡和杨坝镇，西靠广元市旺苍县，并同光雾山国家重点风景名胜区相辉映。北距汉中市约70公里（经铁炉坝山门），南距巴中市约136公里（经陈家山），西距广元市约216公里（经陈家山），面积40155公顷，森林覆盖率为97.3%，被称之为天然氧吧。该公园建于1995年，2002年12月被批准为国家级。古有“巴西外户，蜀北岩疆”之称，今有西部生态旅游新亮点、川陕鄂渝森林旅游“金三角”之誉。</p></h4>
+		            </div>
+		        </a>
+		    </li>
+		</ul>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			var slider = mui("#slider");
+			document.getElementById("switch").addEventListener('toggle', function(e) {
+				if (e.detail.isActive) {
+					slider.slider({
+						interval: 1000
+					});
+				} else {
+					slider.slider({
+						interval: 0
+					});
+				}
+			});
+		</script>
+	</body>
+
+</html>
